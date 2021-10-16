@@ -8,7 +8,7 @@ class Matribut extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        is_login();
+        // is_login();
         $this->load->model('Matribut_model');
         $this->load->library('form_validation');
     }
@@ -44,6 +44,18 @@ class Matribut extends CI_Controller
         );
         $this->template->load('template','matribut/matribut_list', $data);
     }
+
+    public function add_ajax()
+    {
+        $query = $this->Matribut_model->get_all();
+        $data = "<option disabled selected>-Select Attribut- </option>";
+        // print_r($query);
+        foreach ($query as $att) {
+            $data .= "<option value='$att->id1'>$att->atribut</option>";
+        }
+        echo $data;
+    }
+
 
     public function read($id) 
     {

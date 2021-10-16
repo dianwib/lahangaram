@@ -20,11 +20,11 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="<?php echo base_url() ?>assets/adminlte/dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
-       <link rel="stylesheet" href="<?php echo base_url() ?>assets/adminlte/dist/css/skins/_all-skins.min.css">
+     folder instead of downloading all of them to reduce the load. -->
+     <link rel="stylesheet" href="<?php echo base_url() ?>assets/adminlte/dist/css/skins/_all-skins.min.css">
 
-       <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-       <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -322,12 +322,12 @@
             </aside>
             <!-- /.control-sidebar -->
         <!-- Add the sidebar's background. This div must be placed
-           immediately after the control sidebar -->
-           <div class="control-sidebar-bg"></div>
-       </div>
-       <!-- ./wrapper -->
-       <script type="text/javascript" src="<?php echo base_url() ?>assets/js/jquery-1.9.1.min.js"></script>
-       <script type="text/javascript" src="<?php echo base_url() ?>assets/jquery-ui/ui/minified/jquery-ui.min.js"></script>
+         immediately after the control sidebar -->
+         <div class="control-sidebar-bg"></div>
+     </div>
+     <!-- ./wrapper -->
+     <script type="text/javascript" src="<?php echo base_url() ?>assets/js/jquery-1.9.1.min.js"></script>
+     <script type="text/javascript" src="<?php echo base_url() ?>assets/jquery-ui/ui/minified/jquery-ui.min.js"></script>
     <!-- jQuery 3
         <script src="<?php echo base_url() ?>assets/adminlte/bower_components/jquery/dist/jquery.min.js"></script>
     -->
@@ -355,7 +355,7 @@
         let vil = '/Villages/add_ajax_vil'
         // userlevel = JSON.parse(userlevel.toString());
         userlevel = user['id_user_level']
-        console.log("<?php echo site_url(); ?>" +  user.id_province);
+        // console.log("<?php echo site_url(); ?>" +  user.id_province);
 
         $(function() {
             $('.select2').select2()
@@ -375,9 +375,25 @@
                 vil = '/Saltland/add_ajax_vil'
             }
 
+            //attribut
+            var url = "<?php echo site_url('matribut/add_ajax'); ?>";
+            $.get(url, function(data) {
+                console.log(url,data)
+                $('#id_atribut').html(data);
+                // EDIT
+                    <?php if (isset($id_atribut_edit))
+                    {?>
+                        var attribut = <?= $id_atribut_edit ; ?>;
+                        console.log("attribut",attribut);
+                        $('#id_atribut').val(attribut).change();
+                    <?php } ?>
+
+
+            });
+
             //provincie
             $.get("<?php echo site_url(); ?>" + prov, function(data) {
-                console.log(data);
+                // console.log(data);
                 $('#id_provinces').html(data)
 
                 if (userlevel == 4) {
@@ -393,7 +409,7 @@
                 // console.log('prov')
                 var url = "<?php echo site_url('Regencies/add_ajax_reg'); ?>/" + $('#id_provinces').val();
                 // distrik
-                console.log(url);
+                // console.log(url);
                 $.get("<?php echo site_url(); ?>" + reg + "/" + $('#id_provinces').val(), function(data) {
                     $('#id_regencies').html(data)
 
@@ -408,12 +424,22 @@
                 // console.log('prov')
                 var url = "<?php echo site_url('Districts/add_ajax_dis'); ?>/" + $('#id_regencies').val();
                 // distrik
-                console.log(url);
+                // console.log(url);
                 $.get("<?php echo site_url(); ?>" + dis + "/" + $('#id_regencies').val(), function(data) {
                     const prov = data;
                     $('#id_districts').html(data)
+
+                     // EDIT
+                     <?php if (isset($id_districts))
+                     {?>
+                        var districs = <?=$id_districts ?>;
+                        // console.log("kecamatan",districs);
+                        $('#id_districts').val(districs).change();
+                    <?php } ?>
+
                 });
             })
+
 
             //villages
             $('#id_districts').on('change', () => {
@@ -424,11 +450,30 @@
                 $.get("<?php echo site_url(); ?>" + vil + "/" + $('#id_districts').val(), function(data) {
                     const prov = data;
                     $('#id_villages').html(data)
+
+                    // EDIT
+                    <?php if (isset($id_villages))
+                    {?>
+                        var villages = <?=$id_villages ?>;
+                        // console.log("deso",villages);
+                        $('#id_villages').val(villages).change();
+                    <?php } ?>
                 });
             })
 
 
+
+
         })
+
+
+
+
+
+
+
+
+
     </script>
 </body>
 

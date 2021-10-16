@@ -86,7 +86,7 @@ class Saltland_atribute extends CI_Controller
                 'action' => site_url('saltland_atribute/update_action'),
                 'id1' => set_value('id1', $row->id1),
                 'id_saltland' => set_value('id_saltland', $row->id_saltland),
-                'id_atribut' => set_value('id_atribut', $row->id_atribut),
+                'id_atribut_edit' => set_value('id_atribut', $row->id_atribut),
                 'value1' => set_value('value1', $row->value1),
                 'createdate' => set_value('createdate', $row->createdate),
             );
