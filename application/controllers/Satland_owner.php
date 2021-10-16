@@ -152,7 +152,6 @@ class Satland_owner extends CI_Controller
        $this->form_validation->set_rules('address', 'address', 'trim|required');
        $this->form_validation->set_rules('id_villages', 'id_villages', 'required');
        $this->form_validation->set_rules('contact', 'contact', 'trim|required');
-
        $this->form_validation->set_rules('id1', 'id1', 'trim');
        $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
    }
