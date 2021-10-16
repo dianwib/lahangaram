@@ -120,7 +120,7 @@ class Satland_owner extends CI_Controller
               'date1' => $this->input->post('date1',TRUE),
               'name' => $this->input->post('name',TRUE),
               'address' => $this->input->post('address',TRUE),
-              'idvillage' => $this->input->post('idvillage',TRUE),
+              'idvillage' => $this->input->post('id_villages',TRUE),
               'contact' => $this->input->post('contact',TRUE),
           );
 
