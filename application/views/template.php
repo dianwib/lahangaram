@@ -452,9 +452,9 @@
                     $('#id_villages').html(data)
 
                     // EDIT
-                    <?php if (isset($id_villages))
+                    <?php if (isset($id_villages_edit) )
                     {?>
-                        var villages = <?=$id_villages ?>;
+                        var villages = <?=$id_villages_edit ?>;
                         // console.log("deso",villages);
                         $('#id_villages').val(villages).change();
                     <?php } ?>
