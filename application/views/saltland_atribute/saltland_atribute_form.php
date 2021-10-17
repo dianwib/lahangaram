@@ -27,7 +27,7 @@
 				</tr>
 				<tr>
 					<td width='200'>Value1 <?php echo form_error('value1') ?></td>
-					<td><input type="text" class="form-control" name="value1" id="value1" placeholder="Value1" value="<?php echo $value1; ?>" /></td>
+					<td><textarea class="form-control" name="value1" id="value1" placeholder="Value1" rows="8"> <?php echo $value1; ?> </textarea></td>
 				</tr>
 				<tr>
 					<td width='200'>Createdate <?php echo form_error('createdate') ?></td>
