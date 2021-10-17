@@ -11,7 +11,7 @@ class User extends CI_Controller
         is_login();
         $this->load->model('User_model');
         $this->load->library('form_validation');        
-	$this->load->library('datatables');
+        $this->load->library('datatables');
     }
 
     public function index()
@@ -30,14 +30,14 @@ class User extends CI_Controller
         $row = $this->User_model->get_by_id($id);
         if ($row) {
             $data = array(
-		'id_users'      => $row->id_users,
-		'full_name'     => $row->full_name,
-		'email'         => $row->email,
-		'password'      => $row->password,
-		'images'        => $row->images,
-		'id_user_level' => $row->id_user_level,
-		'is_aktif'      => $row->is_aktif,
-	    );
+              'id_users'      => $row->id_users,
+              'full_name'     => $row->full_name,
+              'email'         => $row->email,
+              'password'      => $row->password,
+              'images'        => $row->images,
+              'id_user_level' => $row->id_user_level,
+              'is_aktif'      => $row->is_aktif,
+          );
             $this->template->load('template','user/tbl_user_read', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
@@ -50,14 +50,16 @@ class User extends CI_Controller
         $data = array(
             'button'        => 'Create',
             'action'        => site_url('user/create_action'),
-	    'id_users'      => set_value('id_users'),
-	    'full_name'     => set_value('full_name'),
-	    'email'         => set_value('email'),
-	    'password'      => set_value('password'),
-	    'images'        => set_value('images'),
-	    'id_user_level' => set_value('id_user_level'),
-	    'is_aktif'      => set_value('is_aktif'),
-	);
+            'id_users'      => set_value('id_users'),
+            'full_name'     => set_value('full_name'),
+            'email'         => set_value('email'),
+            'password'      => set_value('password'),
+            'images'        => set_value('images'),
+            'id_user_level' => set_value('id_user_level'),
+            'is_aktif'      => set_value('is_aktif'),
+            'id_user_dinas' => set_value('id_user_dinas'),
+
+        );
         $this->template->load('template','user/tbl_user_form', $data);
     }
     
@@ -76,13 +78,14 @@ class User extends CI_Controller
             //$PasswordBaru   = $this->ocal_lib->EncryptString('lahangaram','dvak2017');            
             
             $data = array(
-		'full_name'     => $this->input->post('full_name',TRUE),
-		'email'         => $this->input->post('email',TRUE),
-		'password'      => $hashPassword,
-		'images'        => $foto['file_name'],
-		'id_user_level' => $this->input->post('id_user_level',TRUE),
-		'is_aktif'      => $this->input->post('is_aktif',TRUE),
-	    );
+              'full_name'     => $this->input->post('full_name',TRUE),
+              'email'         => $this->input->post('email',TRUE),
+              'password'      => $hashPassword,
+              'images'        => $foto['file_name'],
+              'id_user_level' => $this->input->post('id_user_level',TRUE),
+              'id_user_dinas' => $this->input->post('id_user_dinas',TRUE),
+              'is_aktif'      => $this->input->post('is_aktif',TRUE),
+          );
 
             $this->User_model->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success');
@@ -98,14 +101,15 @@ class User extends CI_Controller
             $data = array(
                 'button'        => 'Update',
                 'action'        => site_url('user/update_action'),
-		'id_users'      => set_value('id_users', $row->id_users),
-		'full_name'     => set_value('full_name', $row->full_name),
-		'email'         => set_value('email', $row->email),
-		'password'      => set_value('password', $row->password),
-		'images'        => set_value('images', $row->images),
-		'id_user_level' => set_value('id_user_level', $row->id_user_level),
-		'is_aktif'      => set_value('is_aktif', $row->is_aktif),
-	    );
+                'id_users'      => set_value('id_users', $row->id_users),
+                'full_name'     => set_value('full_name', $row->full_name),
+                'email'         => set_value('email', $row->email),
+                'password'      => set_value('password', $row->password),
+                'images'        => set_value('images', $row->images),
+                'id_user_level' => set_value('id_user_level', $row->id_user_level),
+                'id_user_dinas' => set_value('id_user_level', $row->id_user_dinas),
+                'is_aktif'      => set_value('is_aktif', $row->is_aktif),
+            );
             $this->template->load('template','user/tbl_user_form', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
@@ -121,11 +125,11 @@ class User extends CI_Controller
             $data = array(
                 'button'        => 'Update',
                 'action'        => site_url('user/updatepass_action'),
-		'id_users'      => set_value('id_users', $row->id_users),
-		'full_name'     => set_value('full_name', $row->full_name),
-		'email'         => set_value('email', $row->email),
-		'password'      => set_value('password', $row->password),
-	    );
+                'id_users'      => set_value('id_users', $row->id_users),
+                'full_name'     => set_value('full_name', $row->full_name),
+                'email'         => set_value('email', $row->email),
+                'password'      => set_value('password', $row->password),
+            );
             $this->template->load('template','user/tbl_user_form_pass', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
@@ -142,17 +146,19 @@ class User extends CI_Controller
         } else {
             if($foto['file_name']==''){
                 $data = array(
-		'full_name'     => $this->input->post('full_name',TRUE),
-		'email'         => $this->input->post('email',TRUE),
-		'id_user_level' => $this->input->post('id_user_level',TRUE),
-		'is_aktif'      => $this->input->post('is_aktif',TRUE));
+                  'full_name'     => $this->input->post('full_name',TRUE),
+                  'email'         => $this->input->post('email',TRUE),
+                  'id_user_level' => $this->input->post('id_user_level',TRUE),
+              'id_user_dinas' => $this->input->post('id_user_dinas',TRUE),
+                  'is_aktif'      => $this->input->post('is_aktif',TRUE));
             }else{
                 $data = array(
-		'full_name'     => $this->input->post('full_name',TRUE),
-		'email'         => $this->input->post('email',TRUE),
-                'images'        =>$foto['file_name'],
-		'id_user_level' => $this->input->post('id_user_level',TRUE),
-		'is_aktif'      => $this->input->post('is_aktif',TRUE));
+                  'full_name'     => $this->input->post('full_name',TRUE),
+                  'email'         => $this->input->post('email',TRUE),
+                  'images'        =>$foto['file_name'],
+                  'id_user_level' => $this->input->post('id_user_level',TRUE),
+                'id_user_dinas' => $this->input->post('id_user_dinas',TRUE),
+                  'is_aktif'      => $this->input->post('is_aktif',TRUE));
                 
                 // ubah foto profil yang aktif
                 $this->session->set_userdata('images',$foto['file_name']);
@@ -170,12 +176,12 @@ class User extends CI_Controller
         if ($this->form_validation->run() == FALSE) {
             $this->update($this->input->post('id_users', TRUE));
         } else {
-				$password       = $this->input->post('password',TRUE);
-				$hashPassword   = $this->ocal_lib->EncryptString($password,'dvak2017');   
-                $data = array(
+            $password       = $this->input->post('password',TRUE);
+            $hashPassword   = $this->ocal_lib->EncryptString($password,'dvak2017');   
+            $data = array(
 					//'id_users'     => $this->input->post('id_users',TRUE),
-					'password' => $hashPassword,
-				);
+               'password' => $hashPassword,
+           );
 
             $this->User_model->update($this->input->post('id_users', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
@@ -210,97 +216,98 @@ class User extends CI_Controller
 
     public function _rules() 
     {
-	$this->form_validation->set_rules('full_name', 'full name', 'trim|required');
-	$this->form_validation->set_rules('email', 'email', 'trim|required');
+       $this->form_validation->set_rules('full_name', 'full name', 'trim|required');
+       $this->form_validation->set_rules('email', 'email', 'trim|required');
 	//$this->form_validation->set_rules('password', 'password', 'trim|required');
 	//$this->form_validation->set_rules('images', 'images', 'trim|required');
-	$this->form_validation->set_rules('id_user_level', 'id user level', 'trim|required');
-	$this->form_validation->set_rules('is_aktif', 'is aktif', 'trim|required');
+       $this->form_validation->set_rules('id_user_level', 'id user level', 'trim|required');
+       $this->form_validation->set_rules('id_user_dinas', 'user dinas', 'trim');
+       $this->form_validation->set_rules('is_aktif', 'is aktif', 'trim|required');
 
-	$this->form_validation->set_rules('id_users', 'id_users', 'trim');
-	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
-    }
-    
-    public function _rules_pass() 
-    {
+       $this->form_validation->set_rules('id_users', 'id_users', 'trim');
+       $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+   }
+
+   public function _rules_pass() 
+   {
 	//$this->form_validation->set_rules('full_name', 'full name', 'trim|required');
 	//$this->form_validation->set_rules('email', 'email', 'trim|required');
-	$this->form_validation->set_rules('password', 'password', 'trim|required');
+       $this->form_validation->set_rules('password', 'password', 'trim|required');
 	//$this->form_validation->set_rules('images', 'images', 'trim|required');
 	//$this->form_validation->set_rules('id_user_level', 'id user level', 'trim|required');
 	//$this->form_validation->set_rules('is_aktif', 'is aktif', 'trim|required');
 
-	$this->form_validation->set_rules('id_users', 'id_users', 'trim');
-	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
-    }
-    
-    
+       $this->form_validation->set_rules('id_users', 'id_users', 'trim');
+       $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+   }
 
-    public function excel()
-    {
-        $this->load->helper('exportexcel');
-        $namaFile = "tbl_user.xls";
-        $judul = "tbl_user";
-        $tablehead = 0;
-        $tablebody = 1;
-        $nourut = 1;
+
+
+   public function excel()
+   {
+    $this->load->helper('exportexcel');
+    $namaFile = "tbl_user.xls";
+    $judul = "tbl_user";
+    $tablehead = 0;
+    $tablebody = 1;
+    $nourut = 1;
         //penulisan header
-        header("Pragma: public");
-        header("Expires: 0");
-        header("Cache-Control: must-revalidate, post-check=0,pre-check=0");
-        header("Content-Type: application/force-download");
-        header("Content-Type: application/octet-stream");
-        header("Content-Type: application/download");
-        header("Content-Disposition: attachment;filename=" . $namaFile . "");
-        header("Content-Transfer-Encoding: binary ");
+    header("Pragma: public");
+    header("Expires: 0");
+    header("Cache-Control: must-revalidate, post-check=0,pre-check=0");
+    header("Content-Type: application/force-download");
+    header("Content-Type: application/octet-stream");
+    header("Content-Type: application/download");
+    header("Content-Disposition: attachment;filename=" . $namaFile . "");
+    header("Content-Transfer-Encoding: binary ");
 
-        xlsBOF();
+    xlsBOF();
 
-        $kolomhead = 0;
-        xlsWriteLabel($tablehead, $kolomhead++, "No");
-	xlsWriteLabel($tablehead, $kolomhead++, "Full Name");
-	xlsWriteLabel($tablehead, $kolomhead++, "Email");
-	xlsWriteLabel($tablehead, $kolomhead++, "Password");
-	xlsWriteLabel($tablehead, $kolomhead++, "Images");
-	xlsWriteLabel($tablehead, $kolomhead++, "Id User Level");
-	xlsWriteLabel($tablehead, $kolomhead++, "Is Aktif");
+    $kolomhead = 0;
+    xlsWriteLabel($tablehead, $kolomhead++, "No");
+    xlsWriteLabel($tablehead, $kolomhead++, "Full Name");
+    xlsWriteLabel($tablehead, $kolomhead++, "Email");
+    xlsWriteLabel($tablehead, $kolomhead++, "Password");
+    xlsWriteLabel($tablehead, $kolomhead++, "Images");
+    xlsWriteLabel($tablehead, $kolomhead++, "Id User Level");
+    xlsWriteLabel($tablehead, $kolomhead++, "Is Aktif");
 
-	foreach ($this->User_model->get_all() as $data) {
-            $kolombody = 0;
+    foreach ($this->User_model->get_all() as $data) {
+        $kolombody = 0;
 
             //ubah xlsWriteLabel menjadi xlsWriteNumber untuk kolom numeric
-            xlsWriteNumber($tablebody, $kolombody++, $nourut);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->full_name);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->email);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->password);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->images);
-	    xlsWriteNumber($tablebody, $kolombody++, $data->id_user_level);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->is_aktif);
+        xlsWriteNumber($tablebody, $kolombody++, $nourut);
+        xlsWriteLabel($tablebody, $kolombody++, $data->full_name);
+        xlsWriteLabel($tablebody, $kolombody++, $data->email);
+        xlsWriteLabel($tablebody, $kolombody++, $data->password);
+        xlsWriteLabel($tablebody, $kolombody++, $data->images);
+        xlsWriteNumber($tablebody, $kolombody++, $data->id_user_level);
+        xlsWriteLabel($tablebody, $kolombody++, $data->is_aktif);
 
-	    $tablebody++;
-            $nourut++;
-        }
-
-        xlsEOF();
-        exit();
+        $tablebody++;
+        $nourut++;
     }
 
-    public function word()
-    {
-        header("Content-type: application/vnd.ms-word");
-        header("Content-Disposition: attachment;Filename=tbl_user.doc");
+    xlsEOF();
+    exit();
+}
 
-        $data = array(
-            'tbl_user_data' => $this->User_model->get_all(),
-            'start' => 0
-        );
-        
-        $this->load->view('user/tbl_user_doc',$data);
-    }
-    
-    function profile(){
-        
-    }
+public function word()
+{
+    header("Content-type: application/vnd.ms-word");
+    header("Content-Disposition: attachment;Filename=tbl_user.doc");
+
+    $data = array(
+        'tbl_user_data' => $this->User_model->get_all(),
+        'start' => 0
+    );
+
+    $this->load->view('user/tbl_user_doc',$data);
+}
+
+function profile(){
+
+}
 
 }
 
