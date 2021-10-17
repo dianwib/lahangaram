@@ -17,10 +17,18 @@ class Satland_owner_model extends CI_Model
 
     // datatables
     function json() {
-        $this->datatables->select('id1,id_saltland,date1,name,address,idvillage,contact');
+        $this->datatables->select('satland_owner.id1 as id1,saltland.idmap as idmap,date1,satland_owner.name as name,address,villages.name as village,contact,villageSaltland.name as villageSaltland');
         $this->datatables->from('satland_owner');
+        $this->datatables->join('saltland', 'saltland.id1 = id_saltland');
+        $this->datatables->join('villages', 'villages.id = idvillage');
+        $this->datatables->join('villages villageSaltland', 'villageSaltland.id = saltland.id_village');
+
         //add this line for join
-        //$this->datatables->join('table2', 'satland_owner.field = table2.field');
+
+        if ($this->session->userdata('id_user_level') == 4) {
+            $this->datatables->like('idvillage', $this->session->userdata('id_regency'), 'after');
+        }
+        
         $this->datatables->add_column('action', anchor(site_url('satland_owner/read/$1'),'<i class="fa fa-eye" aria-hidden="true"></i>', array('class' => 'btn btn-info btn-xs', 'target' => '_blank'))." 
             ".anchor(site_url('satland_owner/update/$1'),'<i class="fa fa-pencil-square-o" aria-hidden="true"></i>', array('class' => 'btn btn-danger btn-xs'))." 
                 ".anchor(site_url('satland_owner/delete/$1'),'<i class="fa fa-trash-o" aria-hidden="true"></i>','class="btn btn-danger btn-xs" onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'id1');

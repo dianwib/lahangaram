@@ -93,7 +93,7 @@ class Satland_owner extends CI_Controller
                 'button' => 'Update',
                 'action' => site_url('satland_owner/update_action'),
                 'id1' => set_value('id1', $row->id1),
-                'id_saltland' => set_value('id_saltland', $row->id_saltland),
+                'id_saltland_edit' => set_value('id_saltland', $row->id_saltland),
                 'date1' => set_value('date1', $row->date1),
                 'name' => set_value('name', $row->name),
                 'address' => set_value('address', $row->address),

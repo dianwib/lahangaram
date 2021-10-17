@@ -14,7 +14,7 @@ class Saltland extends CI_Controller
         $this->load->model('Regencies_model');
         $this->load->model('Districts_model');
         $this->load->model('Villages_model');
-        $this->load->library('form_validation');
+    $this->load->library('form_validation');
         $this->load->library('datatables');
     }
 
@@ -22,6 +22,18 @@ class Saltland extends CI_Controller
     {
         $this->template->load('template', 'saltland/saltland_list');
     }
+
+    public function add_ajax()
+    {
+        $query = $this->Saltland_model->get_all2();
+        $data = "<option disabled selected>-Select Saltland- </option>";
+        // print_r($query);
+        foreach ($query as $att) {
+            $data .= "<option value='$att->id1'>idmap : $att->idmap ~ $att->village</option>";
+        }
+        echo $data;
+    }
+
     public function add_ajax_prov()
     {
         $query = $this->Provinces_model->get_all();

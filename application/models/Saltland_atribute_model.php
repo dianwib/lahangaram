@@ -17,10 +17,16 @@ class Saltland_atribute_model extends CI_Model
 
     // datatables
     function json() {
-        $this->datatables->select('id1,id_saltland,id_atribut,value1,createdate');
+        $this->datatables->select('saltland_atribute.id1 as id1,id_saltland, matribut.atribut as atribut,value1,createdate, saltland.id_village, saltland.idmap as idmap, villages.name as village,');
         $this->datatables->from('saltland_atribute');
+        $this->datatables->join('saltland', 'saltland.id1 = id_saltland');
+        $this->datatables->join('villages', 'villages.id = saltland.id_village');
+        $this->datatables->join('matribut', 'matribut.id1 = id_atribut');
+
+        if ($this->session->userdata('id_user_level') == 4) {
+            $this->datatables->like('saltland.id_village', $this->session->userdata('id_regency'), 'after');
+        }
         //add this line for join
-        //$this->datatables->join('table2', 'saltland_atribute.field = table2.field');
         $this->datatables->add_column('action', anchor(site_url('saltland_atribute/read/$1'),'<i class="fa fa-eye" aria-hidden="true"></i>', array('class' => 'btn btn-info btn-xs', 'target' => '_blank'))." 
             ".anchor(site_url('saltland_atribute/update/$1'),'<i class="fa fa-pencil-square-o" aria-hidden="true"></i>', array('class' => 'btn btn-danger btn-xs'))." 
                 ".anchor(site_url('saltland_atribute/delete/$1'),'<i class="fa fa-trash-o" aria-hidden="true"></i>','class="btn btn-danger btn-xs" onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'id1');

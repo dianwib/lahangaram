@@ -40,6 +40,12 @@
                             <!--<input type="text" class="form-control" name="id_user_level" id="id_user_level" placeholder="Id User Level" value="<?php echo $id_user_level; ?>" />-->
                         </td>
                     </tr>
+                    <tr id="pilihUserDinas" class="hidden">
+                        <td width='200'>User Dinas <?php echo form_error('id_user_dinas') ?></td>
+                        <td>
+                            <?php echo cmb_dinamis('id_user_dinas', 'user_dinas', 'name', 'id1', $id_user_dinas, 'DESC') ?>
+                        </td>
+                    </tr>
                     <tr>
                         <td width='200'>Status Aktif <?php echo form_error('is_aktif') ?></td>
                         <td>
@@ -63,3 +69,24 @@
         </div>
 </div>
 </div>
+
+<!-- ./wrapper -->
+     <script type="text/javascript" src="<?php echo base_url() ?>assets/js/jquery-1.9.1.min.js"></script>
+     <script type="text/javascript" src="<?php echo base_url() ?>assets/jquery-ui/ui/minified/jquery-ui.min.js"></script>
+<script type="text/javascript">
+    $("select[name='id_user_level']").on('change', function() {
+    // pilih user dinas
+    if ($(this).val() == 4){
+        $('#pilihUserDinas').removeClass('hidden');
+    } else {
+        $('#pilihUserDinas').addClass('hidden');
+    }
+});
+
+    // EDIT
+    if ($("select[name='id_user_level']").val() == 4){
+        $('#pilihUserDinas').removeClass('hidden');
+    } else {
+        $('#pilihUserDinas').addClass('hidden');
+    }
+</script>

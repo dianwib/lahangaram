@@ -9,7 +9,10 @@
 
 				<table class='table table-bordered>'> <tr>
 					<td width='200'>Id Saltland <?php echo form_error('id_saltland') ?></td>
-					<td><input type="text" class="form-control" name="id_saltland" id="id_saltland" placeholder="Id Saltland" value="<?php echo $id_saltland; ?>" /></td>
+					<td><select class="form-control" name="id_saltland" id="id_saltland">
+								<option disabled selected>-Select Saltland-</option>
+							</select>
+						</td>
 					</tr>
 					<tr>
 						<td width='200'>Date1 <?php echo form_error('date1') ?></td>

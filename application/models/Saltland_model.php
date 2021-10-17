@@ -18,10 +18,15 @@ class Saltland_model extends CI_Model
     // datatables
     function json()
     {
-        $this->datatables->select('id1,id_village,lat,lng,idmap');
+        $this->datatables->select('id1, id_village ,villages.name as village,lat,lng,idmap');
         $this->datatables->from('saltland');
         //add this line for join
-        //$this->datatables->join('table2', 'saltland.field = table2.field');
+        $this->datatables->join('villages', 'villages.id = saltland.id_village');
+
+        if ($this->session->userdata('id_user_level') == 4) {
+            $this->datatables->like('saltland.id_village', $this->session->userdata('id_regency'), 'after');
+        }
+        
         $this->datatables->add_column('action', anchor(site_url('saltland/read/$1'), '<i class="fa fa-eye" aria-hidden="true"></i>', array('class' => 'btn btn-info btn-xs', 'target' => '_blank')) . " 
             " . anchor(site_url('saltland/update/$1'), '<i class="fa fa-pencil-square-o" aria-hidden="true"></i>', array('class' => 'btn btn-danger btn-xs')) . " 
                 " . anchor(site_url('saltland/delete/$1'), '<i class="fa fa-trash-o" aria-hidden="true"></i>', 'class="btn btn-danger btn-xs" onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'id1');
@@ -34,6 +39,20 @@ class Saltland_model extends CI_Model
     {
         $this->db->order_by($this->id, $this->order);
         return $this->db->get($this->table)->result();
+    }
+
+     // get all JPOIN VILLAGe
+    function get_all2()
+    {
+        // $this->db->order_by($this->id, $this->order);
+        $this->db->select('saltland.*, villages.name as village')
+         ->from('saltland')
+         ->join('villages', 'villages.id = saltland.id_village');
+
+         if ($this->session->userdata('id_user_level') == 4) {
+            $this->datatables->like('saltland.id_village', $this->session->userdata('id_regency'), 'after');
+        }
+        return $this->db->get()->result();
     }
 
     // get data by id

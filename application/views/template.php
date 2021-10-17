@@ -378,14 +378,30 @@
             //attribut
             var url = "<?php echo site_url('matribut/add_ajax'); ?>";
             $.get(url, function(data) {
-                console.log(url,data)
+                // console.log(url,data)
                 $('#id_atribut').html(data);
                 // EDIT
                     <?php if (isset($id_atribut_edit))
                     {?>
                         var attribut = <?= $id_atribut_edit ; ?>;
-                        console.log("attribut",attribut);
+                        // console.log("attribut",attribut);
                         $('#id_atribut').val(attribut).change();
+                    <?php } ?>
+
+
+            });
+
+            //saltland
+            var url = "<?php echo site_url('saltland/add_ajax'); ?>";
+            $.get(url, function(data) {
+                // console.log(url,data)
+                $('#id_saltland').html(data);
+                // EDIT
+                    <?php if (isset($id_saltland_edit))
+                    {?>
+                        var saltland = <?= $id_saltland_edit ; ?>;
+                        console.log("saltland",saltland);
+                        $('#id_saltland').val(saltland).change();
                     <?php } ?>
 
 
@@ -446,7 +462,7 @@
 
                 var url = "<?php echo site_url('Villages/add_ajax_vil'); ?>/" + $('#id_districts').val();
 
-                console.log(url);
+                // console.log(url);
                 $.get("<?php echo site_url(); ?>" + vil + "/" + $('#id_districts').val(), function(data) {
                     const prov = data;
                     $('#id_villages').html(data)
