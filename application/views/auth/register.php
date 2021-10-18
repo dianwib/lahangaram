@@ -23,7 +23,7 @@
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
+    <![endif]-->
 
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -34,11 +34,15 @@
 
         <section class="content">
             <div class="box box-warning box-solid">
+
                 <div class="box-header with-border">
                     <h3 class="box-title">REGISTRASI AKUN</h3>
                 </div>
-                <form action="<?php #echo $action; 
-                                ?>" method="post" enctype="multipart/form-data">
+                <?php
+                $msg = $this->session->userdata('message') ?? '';
+                ?>
+                <p class="login-box-msg"><?php echo $msg; ?></p>
+                <form action="<?= $action; ?>" method="post" enctype="multipart/form-data">
 
                     <table class='table table-bordered>'>
                         <tr>
@@ -73,22 +77,22 @@
                     </table>
                 </form>
             </div>
-    </div>
-    <!-- jQuery 3 -->
-    <script src="<?php echo base_url(); ?>assets/adminlte/bower_components/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap 3.3.7 -->
-    <script src="<?php echo base_url(); ?>/assets/adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- iCheck -->
-    <script src="<?php echo base_url(); ?>/assets/adminlte/plugins/iCheck/icheck.min.js"></script>
-    <script>
-        $(function() {
-            $('input').iCheck({
-                checkboxClass: 'icheckbox_square-blue',
-                radioClass: 'iradio_square-blue',
+        </div>
+        <!-- jQuery 3 -->
+        <script src="<?php echo base_url(); ?>assets/adminlte/bower_components/jquery/dist/jquery.min.js"></script>
+        <!-- Bootstrap 3.3.7 -->
+        <script src="<?php echo base_url(); ?>/assets/adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <!-- iCheck -->
+        <script src="<?php echo base_url(); ?>/assets/adminlte/plugins/iCheck/icheck.min.js"></script>
+        <script>
+            $(function() {
+                $('input').iCheck({
+                    checkboxClass: 'icheckbox_square-blue',
+                    radioClass: 'iradio_square-blue',
                 increaseArea: '20%' // optional
             });
-        });
-    </script>
-</body>
+            });
+        </script>
+    </body>
 
-</html>
+    </html>

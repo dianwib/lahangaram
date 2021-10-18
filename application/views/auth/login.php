@@ -100,6 +100,17 @@
             });
         });
     </script>
+
+    <script>
+    // assumes you're using jQuery
+    $(document).ready(function() {
+    $('.confirm-div').hide();
+    <?php if($this->session->userdata('message')){ ?>
+    $('.confirm-div').html('<?php echo $this->session->userdata('message'); ?>').show();
+    <?php } ?>
+    });
+
+</script>
 </body>
 
 </html>
