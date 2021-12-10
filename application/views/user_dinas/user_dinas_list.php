@@ -12,18 +12,18 @@
         <div style="padding-bottom: 10px;"'>
         <?php echo anchor(site_url('user_dinas/create'), '<i class="fa fa-wpforms" aria-hidden="true"></i> Tambah Data', 'class="btn btn-danger btn-sm"'); ?>
 		<?php echo anchor(site_url('user_dinas/excel'), '<i class="fa fa-file-excel-o" aria-hidden="true"></i> Export Ms Excel', 'class="btn btn-success btn-sm"'); ?></div>
-        <table class="table table-bordered table-striped" id="mytable">
+        <table class="table table-bordered table-striped" id="mytable" style="overflow-x:auto;">
             <thead>
                 <tr>
                     <th width="30px">No</th>
 		    <th>NIK</th>
-		    <th>Name</th>
-		    <th>Adress</th>
-		    <th>Phone</th>
+		    <th>Nama</th>
+		    <th>Alamat</th>
+		    <th>Nomor HP</th>
 		    <th>Email</th>
-		    <th>Create Date</th>
-		    <th>Aprove</th>
-		    <th>Id Regencies</th>
+		    <th>Dibuat Tanggal</th>
+		    <th>Disetujui</th>
+		    <th>Id Kabupaten</th>
 		    <th width="200px">Action</th>
                 </tr>
             </thead>
@@ -54,6 +54,7 @@
                 };
 
                 var t = $("#mytable").dataTable({
+                    "scrollX": true,
                     initComplete: function() {
                         var api = this.api();
                         $('#mytable_filter input')
@@ -88,6 +89,7 @@
                         var length = info.iLength;
                         var index = page * length + (iDisplayIndex + 1);
                         $('td:eq(0)', row).html(index);
+                        $('td:eq(5)', row).addClass('wrap-email')
                     }
                 });
             });

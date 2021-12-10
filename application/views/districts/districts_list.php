@@ -16,8 +16,8 @@
             <thead>
                 <tr>
                     <th width="30px">No</th>
-		    <th>Regency Id</th>
-		    <th>Name</th>
+		    <th>Id Kecamatan</th>
+		    <th>Nama</th>
 		    <th width="200px">Action</th>
                 </tr>
             </thead>

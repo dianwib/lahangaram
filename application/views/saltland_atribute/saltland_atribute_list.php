@@ -17,10 +17,10 @@
                         <tr>
                         <th width="30px">No</th>
                         <th>Id Map</th>
-                        <th>Saltland Village</th>
+                        <th>Saltland Desa</th>
                         <th>Atribut</th>
                         <th>Value</th>
-                        <th>Createdate</th>
+                        <th>Dibuat Tanggal</th>
                         <th width="200px">Action</th>
                         </tr>
                         </thead>
@@ -51,6 +51,8 @@
                             };
 
                             var t = $("#mytable").dataTable({
+                                "scrollY": true,
+                                "scrollX": true,
                                 initComplete: function() {
                                     var api = this.api();
                                     $('#mytable_filter input')

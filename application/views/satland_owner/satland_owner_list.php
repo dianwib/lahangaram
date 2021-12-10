@@ -5,7 +5,7 @@
                 <div class="box box-primary box-solid">
                     
                     <div class="box-header">
-                        <h3 class="box-title">KELOLA DATA SATLAND_OWNER</h3>
+                        <h3 class="box-title">KELOLA DATA SATLAND OWNER</h3>
                     </div>
                     
                     <div class="box-body">
@@ -17,12 +17,12 @@
                         <tr>
                         <th width="30px">No</th>
                         <th>Id Saltland</th>
-                        <th>Saltland Village</th>
-                        <th>Date1</th>
-                        <th>Name</th>
-                        <th>Address</th>
-                        <th>Owner Village</th>
-                        <th>Contact</th>
+                        <th>Saltland Desa</th>
+                        <th>Dibuat Tanggal</th>
+                        <th>Nama</th>
+                        <th>Alamat</th>
+                        <th>Desa Pemilik</th>
+                        <th>Kontak</th>
                         <th width="200px">Action</th>
                         </tr>
                         </thead>
@@ -53,6 +53,8 @@
                             };
 
                             var t = $("#mytable").dataTable({
+                                "scrollX": true,
+                                "scrollY": true,
                                 initComplete: function() {
                                     var api = this.api();
                                     $('#mytable_filter input')

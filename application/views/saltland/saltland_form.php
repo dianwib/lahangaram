@@ -10,31 +10,31 @@
 				<table class='table table-bordered>'>
 					<tr>
 						<tr>
-							<td width='200'>Provinces</td>
+							<td width='200'>Provinsi</td>
 							<td><select class="form-control" name="id_provinces" id="id_provinces">
-								<option disabled selected>-Select Provinces-</option>
+								<option disabled selected>-Pilih Provinsi-</option>
 
 							</select></td>
 
 						</tr>
 						<tr>
-							<td width='200'>Regencies</td>
+							<td width='200'>Kabupaten</td>
 							<td><select class="form-control" name="id_regencies" id="id_regencies">
-								<option disabled selected>-Select Regencies-</option>
+								<option disabled selected>-Pilih Kabupaten-</option>
 							</select></td>
 						</tr>
 						<tr>
-							<td width='200'>Districts</td>
+							<td width='200'>Kecamatan</td>
 							<td><select class="form-control" name="id_districts" id="id_districts">
-								<option disabled selected>-Select districts-</option>
+								<option disabled selected>-Pilih Kecamatan-</option>
 							</select></td>
 
 						</tr>
 
 						<tr>
-							<td width='200'>Vilages</td>
+							<td width='200'>Desa</td>
 							<td><select class="form-control" name="id_villages" id="id_villages">
-								<option disabled selected>-Select Vilages-</option>
+								<option disabled selected>-Pilih Desa-</option>
 							</select></td>
 						</tr>
 
@@ -54,7 +54,7 @@
 							<td></td>
 							<td><input type="hidden" name="id1" value="<?php echo $id1; ?>" />
 								<button type="submit" class="btn btn-danger"><i class="fa fa-floppy-o"></i> <?php echo $button ?></button>
-								<a href="<?php echo site_url('saltland') ?>" class="btn btn-info"><i class="fa fa-sign-out"></i> Back</a>
+								<a href="<?php echo site_url('saltland') ?>" class="btn btn-info"><i class="fa fa-sign-out"></i> Kembali</a>
 							</td>
 						</tr>
 					</table>

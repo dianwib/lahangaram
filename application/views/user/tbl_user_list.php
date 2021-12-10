@@ -18,7 +18,7 @@
                         <thead>
                         <tr>
                         <th width="30px">No</th>
-                        <th>Full Name</th>
+                        <th>Nama Lengkap</th>
                         <th>Email</th>
                         <th>Nama Level</th>
                         <th>Status</th>

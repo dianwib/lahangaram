@@ -16,8 +16,8 @@
                         <thead>
                         <tr>
                         <th width="30px">No</th>
-                        <th>Id</th>
-                        <th>Village</th>
+                        <!-- <th>Id</th> -->
+                        <th>Desa</th>
                         <th>Lat</th>
                         <th>Lng</th>
                         <th>Idmap</th>
@@ -68,7 +68,7 @@
                         serverSide: true, 
                         ajax: {"url": "saltland/json" , "type" : "POST" }, 
                         columns: [
-                        {"data" : "id1" , "orderable" : false },
+                        // {"data" : "id1" , "orderable" : false },
                         {"data" : "id1" , "orderable" : false },
                         {"data": "village" },
                         {"data": "lat" },
