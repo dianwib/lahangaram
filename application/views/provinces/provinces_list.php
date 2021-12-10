@@ -5,7 +5,7 @@
                 <div class="box box-primary box-solid">
     
                     <div class="box-header">
-                        <h3 class="box-title">KELOLA DATA PROVINCES</h3>
+                        <h3 class="box-title">KELOLA DATA PROVINSI</h3>
                     </div>
         
         <div class="box-body">
@@ -16,7 +16,7 @@
             <thead>
                 <tr>
                     <th width="30px">No</th>
-		    <th>Name</th>
+		    <th>Nama</th>
 		    <th width="200px">Action</th>
                 </tr>
             </thead>

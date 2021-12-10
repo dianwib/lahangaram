@@ -20,7 +20,7 @@
         <table class="word-table" style="margin-bottom: 10px">
             <tr>
                 <th>No</th>
-		<th>Full Name</th>
+		<th>Nama Lengkap</th>
 		<th>Email</th>
 		<th>Password</th>
 		<th>Images</th>

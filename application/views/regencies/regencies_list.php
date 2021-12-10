@@ -16,8 +16,8 @@
             <thead>
                 <tr>
                     <th width="30px">No</th>
-		    <th>Province Id</th>
-		    <th>Name</th>
+		    <th>Id Kabupaten</th>
+		    <th>Nama</th>
 		    <th width="200px">Action</th>
                 </tr>
             </thead>

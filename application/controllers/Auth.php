@@ -51,6 +51,14 @@
                 if ($user['id_user_level'] == 4){
                     $user = $this->checkUserDinas($user);
                 }
+                if ($user ['is_aktif']== 'y'){
+                    $this->session->set_userdata($user);
+                    redirect('welcome');
+                }            
+                else {
+                    $this->session->set_flashdata('status_login','Akun anda belum aktif');
+                    redirect('auth');
+                }
                 $this->session->set_userdata($user);
                 redirect('welcome');
             } else {
@@ -101,7 +109,7 @@
     public function verification_email($key)
     {
         $this->load->helper('url');
-        $id_user = bin2hex($key);
+        $id_user = bindec($key);
         $this->User_model->update($id_user, ['is_aktif' => 'y']);
         $row = $this->User_model->get_by_id($id_user);
 
@@ -124,8 +132,8 @@
             'protocol' => 'smtp',
             'smtp_host' => 'ssl://smtp.googlemail.com',
             'smtp_port' => 465,
-            'smtp_user' => 'turunanketujuh@gmail.com',
-            'smtp_pass' => 'mbooooot',
+            'smtp_user' => 'alfianbarik3@gmail.com',
+            'smtp_pass' => 'deadvertical',
             'mailtype'  => 'html', 
             'charset'   => 'iso-8859-1'
         );
@@ -135,7 +143,7 @@
             //konfigurasi pengiriman
         $nama = $data['full_name'];
         $email = $data['email'];
-        $encrypted_id = hex2bin($data['last_id_login']);
+        $encrypted_id = decbin($data['last_id_login']);
         $this->email->from($config['smtp_user']);
         $this->email->to($email);
         $this->email->subject("Verifikasi Akun Saltland");

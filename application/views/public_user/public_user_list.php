@@ -17,13 +17,13 @@
                 <tr>
                     <th width="30px">No</th>
 		    <th>NIK</th>
-		    <th>Name</th>
-		    <th>Address</th>
-		    <th>Phone</th>
+		    <th>Nama</th>
+		    <th>Alamat</th>
+		    <th>Nomor HP</th>
 		    <th>Email</th>
-		    <th>Createdate</th>
-            <th>Aprove</th>
-            <th>Id Villages</th>		    
+		    <th>Dibuat Tanggal</th>
+            <th>Disetujui</th>
+            <th>Id Desa</th>		    
 		    <th width="200px">Action</th>
                 </tr>
             </thead>
@@ -54,6 +54,7 @@
                 };
 
                 var t = $("#mytable").dataTable({
+                    "scrollX": true,
                     initComplete: function() {
                         var api = this.api();
                         $(' #mytable_filter input') .off('.DT') .on('keyup.DT', function(e) { if (e.keyCode==13) { api.search(this.value).draw(); } }); }, oLanguage: { sProcessing: "loading..." }, processing: true, serverSide: true, ajax: {"url": "public_user/json" , "type" : "POST" }, columns: [ { "data" : "id1" , "orderable" : false },{"data": "NIK" },{"data": "name" },{"data": "address" },{"data": "phone" },{"data": "email" },{"data": "createdate" },{"data": "aprove" },{"data": "id_villages" }, { "data" : "action" , "orderable" : false, "className" : "text-center" } ], order: [[0, 'desc' ]], rowCallback: function(row, data, iDisplayIndex) { var info=this.fnPagingInfo(); var page=info.iPage; var length=info.iLength; var index=page * length + (iDisplayIndex + 1); $('td:eq(0)', row).html(index); } }); }); </script>

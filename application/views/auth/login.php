@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/adminlte/bower_components/Ionicons/css/ionicons.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/adminlte/dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/adminlte/dist/css/AdminLTE.css">
     <!-- iCheck -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/adminlte/plugins/iCheck/square/blue.css">
 
@@ -32,7 +33,7 @@
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            <p><b>UTM</b> dbLahanGaram</p>
+            <p><b>UTM dbLahanGaram</b></p>
         </div>
         <!-- /.login-logo -->
         <div class="login-box-body">
@@ -58,14 +59,14 @@
             </div>
             <div class="row">
                 <div class="col-xs-4">
-                    <button type="submit" class="btn btn-danger btn-block btn-flat"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</button>
+                    <button type="submit" class="btn btn-danger btn-block btn-flat"><i class="fa fa-sign-in" aria-hidden="true"></i>  Login</button>
                 </div>
                 <div class="col-xs-6">
-                    <?php echo anchor('#', '<i class="fa fa-eye-slash" aria-hidden="true"></i>forgot the password', array('class' => 'btn btn-primary btn-block btn-flat')); ?>
-
+                    <?php echo anchor('auth/register', '<i class="fa fa-sign-in" aria-hidden="true"></i>  registrasi akun', array('class' => 'btn btn-primary btn-block btn-flat')); ?>
+                    
                 </div>
                 <div class="col-xs-6">
-                    <?php echo anchor('auth/register', '<i class="fa fa-eye-slash" aria-hidden="true"></i>registrasi akun', array('class' => 'btn btn-primary btn-block btn-flat')); ?>
+                    <?php echo anchor('#', '<i class="fa fa-eye-slash" aria-hidden="true"></i>forgot the password'); ?>
                 </div>
             </div>
             <!-- /.col -->

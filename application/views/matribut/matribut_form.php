@@ -3,7 +3,7 @@
     <section class="content">
         <div class="box box-primary box-solid">
             <div class="box-header with-border">
-                <h3 class="box-title">INPUT DATA MATRIBUT</h3>
+                <h3 class="box-title">INPUT DATA MASTER ATRIBUT</h3>
             </div>
             <form action="<?php echo $action; ?>" method="post">
             
