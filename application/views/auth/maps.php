@@ -6,9 +6,9 @@
         <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
         <meta name="mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-capable" content="yes">
-        <link rel="stylesheet" href="css/leaflet.css">
-        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
-        <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
+        <link rel="stylesheet" href="<?php echo base_url(); ?>assets/gis/css/leaflet.css">
+        <link rel="stylesheet" href="<?php echo base_url(); ?>assets/gis/css/qgis2web.css"><link rel="stylesheet" href="<?php echo base_url(); ?>assets/gis/css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="<?php echo base_url(); ?>assets/gis/css/leaflet-control-geocoder.Geocoder.css">
         <style>
         html, body, #map {
             width: 100%;
@@ -23,20 +23,20 @@
     <body>
         <div id="map">
         </div>
-        <script src="js/qgis2web_expressions.js"></script>
-        <script src="js/leaflet.js"></script>
-        <script src="js/leaflet.rotatedMarker.js"></script>
-        <script src="js/leaflet.pattern.js"></script>
-        <script src="js/leaflet-hash.js"></script>
-        <script src="js/Autolinker.min.js"></script>
-        <script src="js/rbush.min.js"></script>
-        <script src="js/labelgun.min.js"></script>
-        <script src="js/labels.js"></script>
-        <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
-        <script src="data/sumenep_kelurahan_0.js"></script>
-        <script src="data/sampang_kelurahan_1.js"></script>
-        <script src="data/pamakasan_kelurahan_2.js"></script>
-        <script src="data/bangkalan_kelurahan_3.js"></script>
+        <script src="<?php echo base_url(); ?>assets/gis/js/qgis2web_expressions.js"></script>
+        <script src="<?php echo base_url(); ?>assets/gis/js/leaflet.js"></script>
+        <script src="<?php echo base_url(); ?>assets/gis/js/leaflet.rotatedMarker.js"></script>
+        <script src="<?php echo base_url(); ?>assets/gis/js/leaflet.pattern.js"></script>
+        <script src="<?php echo base_url(); ?>assets/gis/js/leaflet-hash.js"></script>
+        <script src="<?php echo base_url(); ?>assets/gis/js/Autolinker.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/gis/js/rbush.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/gis/js/labelgun.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/gis/js/labels.js"></script>
+        <script src="<?php echo base_url(); ?>assets/gis/js/leaflet-control-geocoder.Geocoder.js"></script>
+        <script src="<?php echo base_url(); ?>assets/gis/data/sumenep_kelurahan_0.js"></script>
+        <script src="<?php echo base_url(); ?>assets/gis/data/sampang_kelurahan_1.js"></script>
+        <script src="<?php echo base_url(); ?>assets/gis/data/pamakasan_kelurahan_2.js"></script>
+        <script src="<?php echo base_url(); ?>assets/gis/data/bangkalan_kelurahan_3.js"></script>
         <script>
         var highlightLayer;
         function highlightFeature(e) {
@@ -498,7 +498,7 @@
         document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
         .title += 'Search for a place';
         var baseMaps = {};
-        L.control.layers(baseMaps,{'bangkalan_kelurahan<br /><table><tr><td style="text-align: center;"><img src="legend/bangkalan_kelurahan_3_Bangkalan0.png" /></td><td>Bangkalan</td></tr><tr><td style="text-align: center;"><img src="legend/bangkalan_kelurahan_3_1.png" /></td><td></td></tr></table>': layer_bangkalan_kelurahan_3,'pamakasan_kelurahan<br /><table><tr><td style="text-align: center;"><img src="legend/pamakasan_kelurahan_2_ada0.png" /></td><td>ada</td></tr><tr><td style="text-align: center;"><img src="legend/pamakasan_kelurahan_2_1.png" /></td><td></td></tr></table>': layer_pamakasan_kelurahan_2,'sampang_kelurahan<br /><table><tr><td style="text-align: center;"><img src="legend/sampang_kelurahan_1_ada0.png" /></td><td>ada</td></tr><tr><td style="text-align: center;"><img src="legend/sampang_kelurahan_1_1.png" /></td><td></td></tr></table>': layer_sampang_kelurahan_1,'sumenep_kelurahan<br /><table><tr><td style="text-align: center;"><img src="legend/sumenep_kelurahan_0_ada0.png" /></td><td>ada</td></tr><tr><td style="text-align: center;"><img src="legend/sumenep_kelurahan_0_1.png" /></td><td></td></tr></table>': layer_sumenep_kelurahan_0,}).addTo(map);
+        L.control.layers(baseMaps,{'bangkalan_kelurahan<br /><table><tr><td style="text-align: center;"><img src="<?php echo base_url(); ?>assets/gis/legend/bangkalan_kelurahan_3_Bangkalan0.png" /></td><td>Bangkalan</td></tr><tr><td style="text-align: center;"><img src="<?php echo base_url(); ?>assets/gis/legend/bangkalan_kelurahan_3_1.png" /></td><td></td></tr></table>': layer_bangkalan_kelurahan_3,'pamakasan_kelurahan<br /><table><tr><td style="text-align: center;"><img src="<?php echo base_url(); ?>assets/gis/legend/pamakasan_kelurahan_2_ada0.png" /></td><td>ada</td></tr><tr><td style="text-align: center;"><img src="<?php echo base_url(); ?>assets/gis/legend/pamakasan_kelurahan_2_1.png" /></td><td></td></tr></table>': layer_pamakasan_kelurahan_2,'sampang_kelurahan<br /><table><tr><td style="text-align: center;"><img src="<?php echo base_url(); ?>assets/gis/legend/sampang_kelurahan_1_ada0.png" /></td><td>ada</td></tr><tr><td style="text-align: center;"><img src="<?php echo base_url(); ?>assets/gis/legend/sampang_kelurahan_1_1.png" /></td><td></td></tr></table>': layer_sampang_kelurahan_1,'sumenep_kelurahan<br /><table><tr><td style="text-align: center;"><img src="<?php echo base_url(); ?>assets/gis/legend/sumenep_kelurahan_0_ada0.png" /></td><td>ada</td></tr><tr><td style="text-align: center;"><img src="<?php echo base_url(); ?>assets/gis/legend/sumenep_kelurahan_0_1.png" /></td><td></td></tr></table>': layer_sumenep_kelurahan_0,}).addTo(map);
         setBounds();
         var i = 0;
         layer_sumenep_kelurahan_0.eachLayer(function(layer) {
