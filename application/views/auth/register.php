@@ -30,7 +30,7 @@
 </head>
 
 <body class="hold-transition login-page">
-    <div class="content-wrapper">
+    <div class="login-box">
 
         <section class="content">
             <div class="box box-warning box-solid">

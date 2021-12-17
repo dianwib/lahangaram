@@ -3239,11 +3239,11 @@ table.text-center th {
   text-align: center;
   margin-bottom: 25px;
   font-weight: 300;
-  color: white;
+  color: rgb(196, 191, 191);
 }
 .login-logo a,
 .register-logo a {
-  color: #444;
+  color: rgb(15, 127, 255);
 }
 .login-page,
 .register-page {
@@ -3283,7 +3283,7 @@ table.text-center th {
 }
 .login-box-msg,
 .register-box-msg {
-  margin: 0;
+  margin: 950;
   text-align: center;
   padding: 0 20px 20px 20px;
 }
@@ -4985,3 +4985,4 @@ table.text-center th {
     white-space: normal !important;
   }
 }
+
