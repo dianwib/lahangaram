@@ -14,7 +14,7 @@ class Saltland extends CI_Controller
         $this->load->model('Regencies_model');
         $this->load->model('Districts_model');
         $this->load->model('Villages_model');
-    $this->load->library('form_validation');
+        $this->load->library('form_validation');
         $this->load->library('datatables');
     }
 
