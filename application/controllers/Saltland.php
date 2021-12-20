@@ -251,6 +251,12 @@ class Saltland extends CI_Controller
         xlsEOF();
         exit();
     }
+
+    public function map(){
+       $this->template->load('template', 'auth/maps - Copy');
+       // $this->load->view('auth/maps');
+
+   }
 }
 
 /* End of file Saltland.php */
