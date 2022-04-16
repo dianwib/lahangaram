@@ -14,12 +14,12 @@
                                 <div class="span10 offset1">
                                     <div class="panel-body">
                                         <div class="row-fluid">
-                                            <div class="span3">
+                                            <div class="span3" style="text-align: center;">
                                                 <img class="img-circle"
-                                                src="<?= @$user_dinas->images ?? 'https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=100"' ?>
-                                                alt="User Pic" style="float: right;">
+                                                src="<?= $user->images ? base_url('upload/'.$user->images)  : 'https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=100' ?>" style="max-height:150px; max-width:150px;" >
+                                                <div ><input type="file" name="images" id="images" accept="image/*"></div>
                                             </div>
-                                            <div class="span6">
+                                            <div class="span6" style="margin-top: 30px">
                                                 <table class="table table-condensed table-responsive table-user-information">
                                                     <tbody>
                                                         <tr>
@@ -54,9 +54,9 @@
                                     <div class="panel-footer">
 
                                         <span class="pull-right">
-                                            <button class="btn btn-danger" type="submit"
+                                            <button class="btn btn-primary" type="submit"
                                             data-toggle="tooltip"
-                                            data-original-title="Remove this user"><i class="icon-remove icon-white"></i> UPDATE DATA</button>
+                                            data-original-title="Update this user"><i class="icon-remove icon-white"></i> UPDATE DATA</button>
                                         </span>
                                     </div>
                                 </div>
@@ -70,7 +70,6 @@
 </div>
 
 <style type="text/css">
-    //Reusing bootstrap 3 panel CSS
     .panel {
         background-color: #FFFFFF;
         border: 1px solid rgba(0, 0, 0, 0);
@@ -128,7 +127,6 @@
         padding: 10px 15px;
     }
 
-    //CSS from v3 snipp
     .user-row {
         margin-bottom: 14px;
     }

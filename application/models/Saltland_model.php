@@ -26,7 +26,7 @@ class Saltland_model extends CI_Model
         if ($this->session->userdata('id_user_level') == 4) {
             $this->datatables->like('saltland.id_village', $this->session->userdata('id_regency'), 'after');
         }
-        
+
         $this->datatables->add_column('action', anchor(site_url('saltland/read/$1'), '<i class="fa fa-eye" aria-hidden="true"></i>', array('class' => 'btn btn-info btn-xs', 'target' => '_blank')) . " 
             " . anchor(site_url('saltland/update/$1'), '<i class="fa fa-pencil-square-o" aria-hidden="true"></i>', array('class' => 'btn btn-danger btn-xs')) . " 
                 " . anchor(site_url('saltland/delete/$1'), '<i class="fa fa-trash-o" aria-hidden="true"></i>', 'class="btn btn-danger btn-xs" onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'id1');
@@ -41,15 +41,15 @@ class Saltland_model extends CI_Model
         return $this->db->get($this->table)->result();
     }
 
-     // get all JPOIN VILLAGe
+    // get all JPOIN VILLAGe
     function get_all2()
     {
         // $this->db->order_by($this->id, $this->order);
         $this->db->select('saltland.*, villages.name as village')
-         ->from('saltland')
-         ->join('villages', 'villages.id = saltland.id_village');
+            ->from('saltland')
+            ->join('villages', 'villages.id = saltland.id_village');
 
-         if ($this->session->userdata('id_user_level') == 4) {
+        if ($this->session->userdata('id_user_level') == 4) {
             $this->datatables->like('saltland.id_village', $this->session->userdata('id_regency'), 'after');
         }
         return $this->db->get()->result();
@@ -106,6 +106,28 @@ class Saltland_model extends CI_Model
     {
         $this->db->where($this->id, $id);
         $this->db->delete($this->table);
+    }
+
+    function get_saltland_from_map($desa, $kec, $kab)
+    {
+        return $this->db->query("
+        select s.lat,s.lng,s.idmap, so.contact,so.name pemilik_so, so.address alamat_pemilik,v.name desa, d.name kec, r.name kab, 
+        (select sa.value1 from saltland_atribute sa join matribut m on m.id1 = sa.id_atribut AND m.atribut = 'lokasi lahan' WHERE sa.id_saltland = s.id1 GROUP BY sa.id_saltland) as lokasi,
+        (select sa.value1 from saltland_atribute sa join matribut m on m.id1 = sa.id_atribut AND m.atribut = 'luas lahan' WHERE sa.id_saltland = s.id1 GROUP BY sa.id_saltland) as luas,
+        (select sa.value1 from saltland_atribute sa join matribut m on m.id1 = sa.id_atribut AND m.atribut = 'hasil produksi' WHERE sa.id_saltland = s.id1 GROUP BY sa.id_saltland) as hasil,
+        (select sa.value1 from saltland_atribute sa join matribut m on m.id1 = sa.id_atribut AND m.atribut = 'tenaga kerja' WHERE sa.id_saltland = s.id1 GROUP BY sa.id_saltland) as tenaga,
+        (select sa.value1 from saltland_atribute sa join matribut m on m.id1 = sa.id_atribut AND m.atribut = 'modal' WHERE sa.id_saltland = s.id1 GROUP BY sa.id_saltland) as modal,
+        (select sa.value1 from saltland_atribute sa join matribut m on m.id1 = sa.id_atribut AND m.atribut = 'pemilik lahan' WHERE sa.id_saltland = s.id1 GROUP BY sa.id_saltland) as pemilik_sa
+        from saltland s
+        left join satland_owner so on so.id_saltland = s.id1
+        join villages v on v.id = s.id_village
+        join districts d on d.id= v.district_id
+        join regencies r on r.id = d.regency_id
+    
+        WHERE v.name = '{$desa}'
+        AND d.name = '{$kec}'
+        AND r.name = 'KABUPATEN {$kab}'
+        group by s.id1")->result();
     }
 }
 

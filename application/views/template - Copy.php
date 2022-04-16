@@ -338,22 +338,12 @@
         <script src="<?php echo base_url() ?>assets/adminlte/bower_components/jquery/dist/jquery.min.js"></script>
     -->
     <!-- Bootstrap 3.3.7 -->
-    <script src="<?php echo base_url() ?>assets/adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- DataTables -->
-    <script src="<?php echo base_url() ?>assets/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="<?php echo base_url() ?>assets/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-    <!-- SlimScroll -->
-    <script src="<?php echo base_url() ?>assets/adminlte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-    <!-- FastClick -->
-    <script src="<?php echo base_url() ?>assets/adminlte/bower_components/fastclick/lib/fastclick.js"></script>
     <!-- AdminLTE App -->
     <script src="<?php echo base_url() ?>assets/adminlte/dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="<?php echo base_url() ?>assets/adminlte/dist/js/demo.js"></script>
-    <!-- Select2 -->
-    <script src="<?php echo base_url() ?>assets/adminlte/bower_components/select2/dist/js/select2.full.min.js"></script>
     <!-- page script -->
-    <script>
+    <!-- <script>
         let user = <?php echo json_encode($this->session->userdata()); ?>;
         let prov = '/Provinces/add_ajax_prov'
         let reg = '/Regencies/add_ajax_reg'
@@ -483,7 +473,7 @@
                 });
             })
         })
-    </script>
+    </script> -->
 </body>
 
 </html>

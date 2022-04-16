@@ -252,11 +252,36 @@ class Saltland extends CI_Controller
         exit();
     }
 
-    public function map(){
-       $this->template->load('template', 'auth/maps - Copy');
-       // $this->load->view('auth/maps');
+    public function map()
+    {
+        //    $this->template->load('template - Copy', 'auth/maps1');
+        //    $this->template->load('template', 'auth/maps - Copy');
+        $this->load->view('auth/maps');
+    }
 
-   }
+    public function getDataFromMap()
+    {
+        try {
+            $data = json_decode(file_get_contents('php://input'));
+            $desa = $data->desa;
+            $kec = $data->kec;
+            $kab = $data->kab;
+            $row = $this->Saltland_model->get_saltland_from_map($desa, $kec, $kab);
+            $output = [
+                'status'    => 200,
+                'message'   => 'Berhasil',
+                'data'      => $row ? $row : [],
+            ];
+            echo json_encode($output);
+        } catch (\Exception $th) {
+            $output = [
+                'status'    => 401,
+                'message'   => $th->getMessage(),
+                'data'      => [],
+            ];
+            echo json_encode($output);
+        }
+    }
 }
 
 /* End of file Saltland.php */

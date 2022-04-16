@@ -20,11 +20,19 @@ class User_profile extends CI_Controller
         $data['user']   =  $this->User_model->get_by_id($this->session->userdata('id_users'));
         $data['user_dinas'] = $this->User_dinas_model->get_by_id($data['user']->id_user_dinas);
 
-        $this->template->load('template', 'user_profile/index',$data);
+        $this->template->load('template', 'user_profile/index', $data);
     }
 
     public function update_action($id)
     {
+        $config['upload_path']          =  './upload/';
+        $config['allowed_types']        = 'gif|jpg|jpeg|png';
+        $config['file_name']            = 'avatar-' . $id;
+        $config['overwrite']            = true;
+
+        $this->load->library('upload', $config);
+
+
         $data = array(
             'NIK' => $this->input->post('nik'),
             'name' => $this->input->post('name'),
@@ -32,23 +40,27 @@ class User_profile extends CI_Controller
             'phone' => $this->input->post('phone'),
             'email' => $this->input->post('email'),
         );
-
-        $user_dinas = $this->input->post('id_user_dinas');
-
         $data_user = array(
             'full_name' => $this->input->post('name'),
             'email' => $this->input->post('email'),
         );
 
+        if ($this->upload->do_upload('images')) {
+            $uploaded_data = $this->upload->data();
+            $data_user['images']  = $uploaded_data['file_name'];
+        }
+
+        $user_dinas = $this->input->post('id_user_dinas');
+
+       
+
         $this->User_model->update($id, $data_user);
-        if($user_dinas != '' || $user_dinas != null || $user_dinas != 0) {
+        if ($user_dinas != '' || $user_dinas != null || $user_dinas != 0) {
             $this->User_dinas_model->update($user_dinas, $data);
         }
         $this->session->set_flashdata('message', 'Update User Success');
         redirect(site_url('user_profile'));
     }
-
-    
 }
 
 /* End of file User_dinas.php */
