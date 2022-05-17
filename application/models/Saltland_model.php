@@ -108,7 +108,7 @@ class Saltland_model extends CI_Model
         $this->db->delete($this->table);
     }
 
-    function get_saltland_from_map($desa, $kec, $kab)
+    function get_saltland_from_map($kode)
     {
         return $this->db->query("
         select s.lat,s.lng,s.idmap, so.contact,so.name pemilik_so, so.address alamat_pemilik,v.name desa, d.name kec, r.name kab, 
@@ -124,10 +124,14 @@ class Saltland_model extends CI_Model
         join districts d on d.id= v.district_id
         join regencies r on r.id = d.regency_id
     
-        WHERE v.name = '{$desa}'
-        AND d.name = '{$kec}'
-        AND r.name = 'KABUPATEN {$kab}'
+        WHERE s.id_village = '{$kode}'
         group by s.id1")->result();
+    }
+
+    function get_all_desa_saltland_from_map($kab = 'SUMENEP')
+    {
+        return $this->db->query("
+        select * from saltland")->result();
     }
 }
 
