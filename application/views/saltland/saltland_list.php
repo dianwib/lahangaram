@@ -10,9 +10,13 @@
 
                     <div class="box-body">
                         <div style="padding-bottom: 10px;"'>
-                        <?php echo anchor(site_url('saltland/create'), '<i class="fa fa-wpforms" aria-hidden="true"></i> Tambah Data', 'class="btn btn-danger btn-sm"'); ?>
+                        <?php if ($this->session->userdata('id_user_level') != 3){
+                            echo anchor(site_url('saltland/create'), '<i class="fa fa-wpforms" aria-hidden="true"></i> Tambah Data', 'class="btn btn-danger btn-sm"');
+                        }?>
+
+                        <!-- <?php echo anchor(site_url('saltland/create'), '<i class="fa fa-wpforms" aria-hidden="true"></i> Tambah Data', 'class="btn btn-danger btn-sm"'); ?> -->
                         <?php echo anchor(site_url('saltland/excel'), '<i class="fa fa-file-excel-o" aria-hidden="true"></i> Export Ms Excel', 'class="btn btn-success btn-sm"'); ?></div>
-                        <table class="table table-bordered table-striped" id="mytable">
+                        <table class="table table-bordered table-striped" id="mytable" data-level="<?php echo $this->session->userdata('id_user_level') ?>">
                         <thead>
                         <tr>
                         <th width="30px">No</th>
@@ -21,7 +25,7 @@
                         <th>Lat</th>
                         <th>Lng</th>
                         <th>Idmap</th>
-                        <th width="200px">Action</th>
+                        <th width="200px" style="<?php echo $this->session->userdata('id_user_level') != 3 ? '' : 'display:none';?>">Action</th>
                         </tr>
                         </thead>
                         
@@ -38,6 +42,17 @@
                         <script>
                         </script>
                         <script type="text/javascript">
+                            var level = document.getElementById('mytable').getAttribute('data-level');
+                            var columns = [
+                                // {"data" : "id1" , "orderable" : false },
+                                {"data" : "id1" , "orderable" : false },
+                                {"data": "village" },
+                                {"data": "lat" },
+                                {"data": "lng" },
+                                {"data": "idmap" },
+                                { "data" : "action", "orderable" : false, "className" : "text-center" },
+                            ]
+                            if(level === '3') columns.pop();
                         $(document).ready(function() {
                             $.fn.dataTableExt.oApi.fnPagingInfo = function(oSettings)
                             {
@@ -62,20 +77,14 @@
                                     api.search(this.value).draw(); 
                                 } 
                             }); 
+
+                            level = $('#mytable').attr('data-level');
                         }, 
                         oLanguage: { sProcessing: "loading..." }, 
                         processing: true, 
                         serverSide: true, 
                         ajax: {"url": "saltland/json" , "type" : "POST" }, 
-                        columns: [
-                        // {"data" : "id1" , "orderable" : false },
-                        {"data" : "id1" , "orderable" : false },
-                        {"data": "village" },
-                        {"data": "lat" },
-                        {"data": "lng" },
-                        {"data": "idmap" },
-                        { "data" : "action" , "orderable" : false, "className" : "text-center" },
-                        ], 
+                        columns, 
                         order: [[0, 'desc' ]], 
                         rowCallback: function(row, data, iDisplayIndex) { 
                         var info=this.fnPagingInfo(); 

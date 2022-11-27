@@ -48,6 +48,7 @@
                 //if(password_verify($password,$user['password'])){
             if (substr($hashPass, 7) ==  substr($user['password'], 7)) {
                     // retrive user data to session
+                    echo $user['id_user_level']; 
                 if ($user['id_user_level'] == 4){
                     $user = $this->checkUserDinas($user);
                 }
@@ -130,10 +131,10 @@
 
         $config = Array(
             'protocol' => 'smtp',
-            'smtp_host' => 'ssl://smtp.googlemail.com',
+            'smtp_host' => 'ssl://smtp.gmail.com',
             'smtp_port' => 465,
-            'smtp_user' => 'alfianbarik3@gmail.com',
-            'smtp_pass' => 'deadvertical',
+            'smtp_user' => 'turunanketujuh@gmail.com',
+            'smtp_pass' => 'mbooooot',
             'mailtype'  => 'html', 
             'charset'   => 'iso-8859-1'
         );

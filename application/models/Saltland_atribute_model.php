@@ -90,6 +90,64 @@ class Saltland_atribute_model extends CI_Model
         $this->db->delete($this->table);
     }
 
+    function get_klustering_data(){
+        $data_lahan = $this->db->query("SELECT 
+            value1 AS val, 
+            villages.name AS desa
+            FROM
+            `saltland_atribute`
+            JOIN matribut ON matribut.id1 = saltland_atribute.id_atribut
+            JOIN saltland ON saltland_atribute.id_saltland = saltland.id1
+            JOIN villages ON saltland.id_village = villages.id
+            WHERE
+                id_atribut = 17"
+        )->result_array();
+        $data_kapasitas_gudang = $this->db->query("SELECT 
+            value1 AS val, 
+            villages.name AS desa
+            FROM
+            `saltland_atribute`
+            JOIN matribut ON matribut.id1 = saltland_atribute.id_atribut
+            JOIN saltland ON saltland_atribute.id_saltland = saltland.id1
+            JOIN villages ON saltland.id_village = villages.id
+            WHERE
+                id_atribut = 20"
+        )->result_array();
+        $desa = array_map(function($item){
+            return $item['desa'];
+        }, $data_lahan);
+        $unique_desa = array_unique($desa);
+
+        $categoried_data = [];
+        foreach ($unique_desa as $key => $value) {
+            $lahans = array_map(function($item) use ($value){
+                if($item['desa'] === $value){
+                    return (int)$item['val'];
+                }
+            }, $data_lahan);
+            $gudangs = array_map(function($item) use ($value){
+                if($item['desa'] === $value){
+                    return (int)$item['val'];
+                }
+            }, $data_kapasitas_gudang);
+            array_push($categoried_data, array('desa' => $value, 'lahans' => $lahans, 'gudangs' => $gudangs));
+        };
+
+        $data = array_map(function($item){
+            $luas_lahan = array_reduce($item['lahans'], function($prev, $curr){
+                $prev += $curr;
+                return $prev;
+            });
+            $kapasitas_gudang = array_reduce($item['gudangs'], function($prev, $curr){
+                $prev += $curr;
+                return $prev;
+            });
+            return array('desa' => $item['desa'], 'luas_lahan' => $luas_lahan, 'kapasitas_gudang' => $kapasitas_gudang);
+        }, $categoried_data);
+
+        return $data;
+    }
+
 }
 
 /* End of file Saltland_atribute_model.php */

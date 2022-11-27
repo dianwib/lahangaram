@@ -9,10 +9,13 @@
                     </div>
                     
                     <div class="box-body">
-                        <div style="padding-bottom: 10px;"'>
-                        <?php echo anchor(site_url('saltland_atribute/create'), '<i class="fa fa-wpforms" aria-hidden="true"></i> Tambah Data', 'class="btn btn-danger btn-sm"'); ?>
+                        <div style="padding-bottom: 10px;">
+                        <?php if ($this->session->userdata('id_user_level') != 3){
+                            echo anchor(site_url('saltland_atribute/create'), '<i class="fa fa-wpforms" aria-hidden="true"></i> Tambah Data', 'class="btn btn-danger btn-sm"');
+                        }?>
+                        <!-- <?php echo anchor(site_url('saltland_atribute/create'), '<i class="fa fa-wpforms" aria-hidden="true"></i> Tambah Data', 'class="btn btn-danger btn-sm"'); ?> -->
                         <?php echo anchor(site_url('saltland_atribute/excel'), '<i class="fa fa-file-excel-o" aria-hidden="true"></i> Export Ms Excel', 'class="btn btn-success btn-sm"'); ?></div>
-                        <table class="table table-bordered table-striped" id="mytable">
+                        <table class="table table-bordered table-striped" id="mytable" data-level="<?php echo $this->session->userdata('id_user_level') ?>">
                         <thead>
                         <tr>
                         <th width="30px">No</th>
@@ -21,7 +24,8 @@
                         <th>Atribut</th>
                         <th>Value</th>
                         <th>Dibuat Tanggal</th>
-                        <th width="200px">Action</th>
+                        <!-- <th width="200px" style="<?php echo $this->session->userdata('id_user_level') != 3 ? '' : 'display:none';?>">Action</th> -->
+                        <?php echo $this->session->userdata('id_user_level') != 3 ? '<th width="200px">Action</th>': '';?>
                         </tr>
                         </thead>
                         
@@ -36,6 +40,21 @@
                         <script src="<?php echo base_url('assets/datatables/jquery.dataTables.js') ?>"></script>
                         <script src="<?php echo base_url('assets/datatables/dataTables.bootstrap.js') ?>"></script>
                         <script type="text/javascript">
+                            var level = document.getElementById('mytable').getAttribute('data-level');
+                            var columns = [
+                                {"data": "id1","orderable": false},
+                                {"data": "idmap"},
+                                {"data": "village"},
+                                {"data": "atribut"},
+                                {"data": "value1"},
+                                {"data": "createdate"},
+                                {
+                                    "data" : "action",
+                                    "orderable": false,
+                                    "className" : "text-center"
+                                }
+                            ]
+                            if(level === '3') columns.pop();
                         $(document).ready(function() {
                             $.fn.dataTableExt.oApi.fnPagingInfo = function(oSettings)
                             {
@@ -69,19 +88,7 @@
                     processing: true,
                     serverSide: true,
                     ajax: {"url": "saltland_atribute/json", "type": "POST"},
-                    columns: [
-                    {"data": "id1","orderable": false},
-                    {"data": "idmap"},
-                    {"data": "village"},
-                    {"data": "atribut"},
-                    {"data": "value1"},
-                    {"data": "createdate"},
-                    {
-                        "data" : "action",
-                        "orderable": false,
-                        "className" : "text-center"
-                    }
-                    ],
+                    columns,
                     order: [[0, 'desc']],
                     rowCallback: function(row, data, iDisplayIndex) {
                     var info = this.fnPagingInfo();

@@ -68,7 +68,7 @@
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-control" name="password" placeholder="Your Password *" value="" />
-                    <small class="text-center text-dark">*<?php echo $message; ?></small>
+                    <small class="text-center text-danger">*<?php echo $message; ?></small>
 
                 </div>
                 <div class="form-group">

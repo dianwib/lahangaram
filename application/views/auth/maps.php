@@ -158,6 +158,7 @@
                 if (resp.status != 200) {
                     throw resp.message;
                 }
+                
 
                 $("#myTable > tbody").html("");
                 if (resp.data != []) {
@@ -213,8 +214,8 @@
                 var kec = a.split('KECAMATAN</th><td>').pop().split('</td>')[0];
                 var kab = a.split('KABUPATEN</th><td>').pop().split('</td>')[0];
                 var kode = a.split('KODE</th><td>').pop().split('</td>')[0];
-                var newCode = parseFloat(kode.toString().replace(/,/g, ""));
-                // console.log(kode,newCode)
+                var newCode =(kode.toString().split('.').join(""));
+                console.log(kode,newCode)
 
                 getDataSatland(newCode);
             }
